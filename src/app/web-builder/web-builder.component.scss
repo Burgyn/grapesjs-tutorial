@@ -1,0 +1,99 @@
+.editor-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+  position: relative; /* Pridá relatívne umiestnenie pre referenčný bod */
+  background-color: #1A1A23;
+}
+
+.panel__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  border-bottom: 1px solid rgba(217, 224, 237, 0.19);
+  width: 100%;
+  z-index: 100; /* Vyšší z-index, aby bol panel vždy navrchu */
+  box-sizing: border-box;
+  position: relative; /* Relatívna pozícia, aby bol panel vždy navrchu */
+}
+
+.editor-layout {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  width: 100%;
+}
+
+#blocks {
+  width: 250px;
+  overflow-y: auto;
+  border-right: 1px solid rgba(217, 224, 237, 0.19);
+  box-sizing: border-box;
+  background-color: #1A1A23 !important;
+}
+
+#gjs {
+  flex: 1;
+  height: 100%;
+  overflow: auto;
+  position: relative; /* Relatívna pozícia, aby bola kontrola nad presahovaním */
+  z-index: 1; /* Nižší z-index ako panel, aby bol pod ním */
+  box-sizing: border-box;
+}
+
+
+/* Theming */
+
+/* We can remove the border we've set at the beginning */
+#gjs {
+  border: none;
+  margin: 20px;
+  border-radius: 19px;
+}
+/* Theming */
+
+/* Primary color for the background */
+.gjs-one-bg {
+  background-color: #1A1A23 !important;
+}
+
+/* Secondary color for the text color */
+.gjs-two-color {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Tertiary color for the background */
+.gjs-three-bg {
+  background-color: #1A1A23 !important;
+  color: white;
+}
+
+/* Quaternary color for the text color */
+.gjs-four-color{
+  color: #FFFFFF !important;
+}
+.gjs-four-color-h:hover {
+  color: #EEBD9E !important;
+}
+
+.gjs-block{
+  border-color: #D9E0ED30 !important;
+  background-color: rgba(217, 224, 237, 0.05) !important;
+  min-height: 0;
+}
+
+.gjs-block:hover{
+  background-color: rgba(217, 224, 237, 0.2) !important;
+}
+
+.gjs-pn-panels{
+  display: none !important;
+}
+
+:root {
+  --gjs-left-width: 0% !important; /* Nastavenie šírky ľavého panelu na 0 */
+  --gjs-canvas-top: 0% !important; /* Nastavenie horného okraja na 0 */
+  --gjs-main-font: 'Monda', sans-serif !important; /* Nastavenie písma */
+}
