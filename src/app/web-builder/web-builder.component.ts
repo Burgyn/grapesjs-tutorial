@@ -28,8 +28,12 @@ export class WebBuilderComponent {
       // Size of the editor
       height: '100vh',
       width: 'auto',
-      // Disable the storage manager for the moment
-      storageManager: false,
+      storageManager: {
+        type: 'local', // Storage type. Available: local | remote
+        autosave: true, // Store data automatically
+        autoload: true, // Autoload stored data on init
+        stepsBeforeSave: 1, // If autosave is enabled, indicates how many changes are necessary before the store method is triggered        
+      },
       plugins: [grapesjs_preset_webpage, grapesjs_blocks_basic, grapesjs_plugin_forms],
       pluginsOpts: {
         grapesjs_preset_webpage: {},
@@ -167,10 +171,10 @@ export class WebBuilderComponent {
     });
 
     // Blok "Splatnosť"
-  blockManager.add('due-date', {
-    label: 'Splatnosť',
-    category: 'Fakturácia',
-    media: `
+    blockManager.add('due-date', {
+      label: 'Splatnosť',
+      category: 'Fakturácia',
+      media: `
       <svg width="40" height="40" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#d2bdb6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
         <rect x="3" y="4" width="18" height="16" rx="2" ry="2"></rect>
         <line x1="16" y1="2" x2="16" y2="6"></line>
@@ -179,7 +183,7 @@ export class WebBuilderComponent {
         <text x="6" y="16" font-size="8" fill="#d2bdb6">14</text>
       </svg>
     `,
-    content: `
+      content: `
 <div style="display: flex; flex-direction: column; font-family: Arial, sans-serif; font-size: 14px; color: #d2bdb6;">
   <label for="due-days" style="margin-bottom: 5px; color: #fff;">Splatnosť</label>
   <div style="display: flex; gap: 10px;">
@@ -188,13 +192,13 @@ export class WebBuilderComponent {
   </div>
 </div>
     `
-  });
+    });
 
-  // Blok "DPH Výpočet"
-  blockManager.add('vat-calculation', {
-    label: 'DPH Výpočet',
-    category: 'Fakturácia',
-    media: `
+    // Blok "DPH Výpočet"
+    blockManager.add('vat-calculation', {
+      label: 'DPH Výpočet',
+      category: 'Fakturácia',
+      media: `
       <svg width="40" height="40" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#d2bdb6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
         <rect x="2" y="4" width="20" height="16" rx="2" ry="2"></rect>
         <line x1="6" y1="8" x2="18" y2="8"></line>
@@ -202,7 +206,7 @@ export class WebBuilderComponent {
         <line x1="6" y1="16" x2="12" y2="16"></line>
       </svg>
     `,
-    content: `
+      content: `
       <div style="font-family: Arial, sans-serif; font-size: 14px; color: #d2bdb6; background-color: #2a2b32; padding: 10px; border: 1px solid #555;">
         <div data-gjs-editable="false" data-gjs-draggable="false" data-gjs-removable="false" data-gjs-draggable="false" style="border-bottom: 1px solid #555; padding-bottom: 5px; margin-bottom: 5px;">
           <div data-gjs-editable="false" data-gjs-draggable="false" data-gjs-removable="false" data-gjs-draggable="false" style="display: flex; justify-content: space-between; margin-bottom: 5px;">
@@ -220,14 +224,14 @@ export class WebBuilderComponent {
         </div>
       </div>
     `
-  });
-    
+    });
 
-// Blok "Tabuľka Položiek"
-blockManager.add('item-table', {
-  label: 'Tabuľka Položiek',
-  category: 'Fakturácia',
-  media: `
+
+    // Blok "Tabuľka Položiek"
+    blockManager.add('item-table', {
+      label: 'Tabuľka Položiek',
+      category: 'Fakturácia',
+      media: `
     <svg width="40" height="40" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#d2bdb6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
       <rect x="2" y="4" width="20" height="16" rx="2" ry="2"></rect>
       <line x1="2" y1="10" x2="22" y2="10"></line>
@@ -237,7 +241,7 @@ blockManager.add('item-table', {
       <line x1="18" y1="4" x2="18" y2="20"></line>
     </svg>
   `,
-  content: `
+      content: `
      <table style="width: 100%; border-collapse: collapse; font-family: Arial, sans-serif; font-size: 14px; color: #d2bdb6;">
       <thead>
         <tr style="border-bottom: 1px solid #555; text-align: left; color: #888;">
@@ -277,33 +281,33 @@ blockManager.add('item-table', {
       </tbody>
     </table>
   `
-});
+    });
 
-// Blok "Separator"
-blockManager.add('separator', {
-  label: 'Separator',
-  category: 'Basic',
-  media: `
+    // Blok "Separator"
+    blockManager.add('separator', {
+      label: 'Separator',
+      category: 'Basic',
+      media: `
     <svg width="40" height="40" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#d2bdb6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <line x1="4" y1="12" x2="20" y2="12"></line>
     </svg>
   `,
-  content: `
+      content: `
     <hr style="border: none; border-top: 1px solid #555; margin: 20px 0;"/>
   `
-});
+    });
 
-// Blok "Zádržné"
-blockManager.add('retention', {
-  label: 'Zádržné',
-  category: 'Fakturácia',
-  media: `
+    // Blok "Zádržné"
+    blockManager.add('retention', {
+      label: 'Zádržné',
+      category: 'Fakturácia',
+      media: `
     <svg width="40" height="40" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#d2bdb6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <rect x="1" y="10" width="22" height="12" rx="6" ry="6" fill="#444"/>
       <circle cx="8" cy="16" r="5" fill="#888"/>
     </svg>
   `,
-  content: `
+      content: `
     <div style="font-family: Arial, sans-serif; font-size: 14px; color: #d2bdb6;">
       <div style="display: flex; align-items: center; margin-bottom: 10px;">
         <label class="toggle-switch" style="margin-right: 10px;">
@@ -388,21 +392,21 @@ blockManager.add('retention', {
       });
     </script>
   `
-});
+    });
 
 
-// Blok "Pečiatka, podpis"
-blockManager.add('stamp-signature', {
-  label: 'Pečiatka, podpis',
-  category: 'Faktuácia',
-  media: `
+    // Blok "Pečiatka, podpis"
+    blockManager.add('stamp-signature', {
+      label: 'Pečiatka, podpis',
+      category: 'Fakturácia',
+      media: `
 <svg width="40" height="40" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#d2bdb6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
   <path d="M5 11h14l-2 9H7l-2-9z" />
   <path d="M8 11V6a4 4 0 0 1 8 0v5" />
   <path d="M10 19h4" />
 </svg>
   `,
-  content: `
+      content: `
     <div style="font-family: Arial, sans-serif; font-size: 14px; color: #d2bdb6;">
       <div style="display: flex; align-items: center; margin-bottom: 10px;">
         <label class="toggle-switch" style="margin-right: 10px;">
@@ -483,7 +487,7 @@ blockManager.add('stamp-signature', {
       });
     </script>
   `
-});
+    });
 
 
   }
